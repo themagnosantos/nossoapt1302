@@ -3,216 +3,359 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Apto 1302 · Painel Financeiro</title>
+<title>Apto 1302 · Talita ❤️ Magno</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
-  --bg:#0D1117;--panel:#141A23;--panel2:#1A2230;--line:#232C3B;
-  --txt:#E6EAF0;--mut:#8B96A8;--dim:#5C6878;
-  --green:#3FB68B;--amber:#C9A254;--red:#D9646E;--blue:#6B93C8;--ink:#0B0F14;--r:14px;
+  --bg:#F0F4FA;--panel:#FFFFFF;--panel2:#EAF0FB;--line:#D5DFF0;
+  --txt:#1A2235;--mut:#5A6B88;--dim:#8A9BB8;
+  --green:#1FA868;--amber:#C47F17;--red:#C43B3B;--blue:#3570C4;--ink:#FFFFFF;--r:16px;
+  --shadow:0 2px 16px rgba(30,60,120,.10);
+  --shadow-card:0 4px 24px rgba(30,60,120,.13);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;padding-bottom:90px;font-size:15px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;padding-bottom:100px;font-size:16px}
 h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.01em}
 .mono{font-family:'JetBrains Mono',monospace}
 button{font-family:inherit}
 a{color:inherit}
 
-header{max-width:1000px;margin:0 auto;padding:26px 18px 14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end}
-.eyebrow{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);font-weight:600}
-header h1{font-size:1.35rem;font-weight:700;margin-top:4px}
-header .sub{color:var(--mut);font-size:.8rem;margin-top:3px}
-.hbtns{display:flex;gap:8px;flex-wrap:wrap}
-.mini{border:1px solid var(--line);background:var(--panel);color:var(--txt);padding:9px 14px;border-radius:10px;font-size:.74rem;font-weight:600;cursor:pointer;transition:.15s}
-.mini:hover{background:var(--panel2)}
-.mini.pri{background:var(--txt);color:var(--ink);border-color:var(--txt)}
+/* ============ LOGIN SCREEN ============ */
+#loginScreen{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#1a2a4a 0%,#2d4a7a 60%,#3a2060 100%);display:flex;align-items:center;justify-content:center;padding:20px}
+#loginScreen.hidden{display:none}
+.login-box{background:rgba(255,255,255,.07);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:44px 36px;width:100%;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.login-heart{font-size:2.8rem;margin-bottom:8px;display:block}
+.login-title{font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:700;color:#fff;margin-bottom:4px}
+.login-sub{font-size:.88rem;color:rgba(255,255,255,.55);margin-bottom:30px}
+.login-field{margin-bottom:14px;text-align:left}
+.login-field label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px}
+.login-field input{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;color:#fff;padding:13px 15px;font-size:1rem;font-family:'Inter'}
+.login-field input::placeholder{color:rgba(255,255,255,.3)}
+.login-field input:focus{outline:none;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.15)}
+.login-btn{width:100%;background:linear-gradient(135deg,#e87fd4,#7b5ef8);color:#fff;border:none;border-radius:12px;padding:14px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:6px;transition:.2s;letter-spacing:.02em}
+.login-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.login-err{color:#ff8fa3;font-size:.82rem;margin-top:10px;min-height:20px}
 
-nav{position:sticky;top:0;z-index:60;background:rgba(13,17,23,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.tabs{display:flex;gap:4px;overflow-x:auto;padding:10px 14px;max-width:1000px;margin:0 auto;scrollbar-width:none}
+/* ============ HEADER ============ */
+header{max-width:1100px;margin:0 auto;padding:28px 20px 16px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
+.eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:700}
+header h1{font-size:1.55rem;font-weight:700;margin-top:5px;color:var(--txt)}
+.couple-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f9e0f5,#e0eaff);border:1px solid #d4b8f0;border-radius:99px;padding:5px 14px;font-size:.9rem;font-weight:700;color:#7040c0;margin-top:6px;box-shadow:0 2px 8px rgba(120,80,200,.15)}
+.hbtns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.mini{border:1px solid var(--line);background:var(--panel);color:var(--txt);padding:10px 18px;border-radius:11px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s;box-shadow:var(--shadow)}
+.mini:hover{background:var(--panel2);transform:translateY(-1px)}
+.mini.pri{background:linear-gradient(135deg,#1FA868,#15805A);color:#fff;border:none;box-shadow:0 4px 14px rgba(31,168,104,.30)}
+.mini.pri:hover{filter:brightness(1.08)}
+.mini.danger{color:var(--red);border-color:#f5d5d5}
+
+/* ============ COUNTDOWN ============ */
+#countdownBanner{background:linear-gradient(135deg,#1a2a4a,#2d4a7a);border-radius:18px;padding:18px 22px;margin:0 20px 0;max-width:1100px;margin-left:auto;margin-right:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;box-shadow:0 6px 30px rgba(30,60,120,.25)}
+.cd-label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:700;margin-bottom:6px}
+.cd-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:10px}
+.cd-units{display:flex;gap:10px;flex-wrap:wrap}
+.cd-unit{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 14px;text-align:center;min-width:62px}
+.cd-num{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:#7ad4ff;line-height:1}
+.cd-lbl{font-size:.62rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.cd-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8);border-radius:10px;padding:8px 14px;font-size:.76rem;font-weight:600;cursor:pointer;transition:.15s;flex-shrink:0}
+.cd-btn:hover{background:rgba(255,255,255,.22);color:#fff}
+@media(max-width:600px){
+  #countdownBanner{padding:14px 16px;margin:0 12px}
+  .cd-num{font-size:1.2rem}
+  .cd-unit{padding:8px 10px;min-width:52px}
+}
+
+/* ============ NAV ============ */
+nav{position:sticky;top:0;z-index:60;background:rgba(240,244,250,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(30,60,120,.07)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 16px;max-width:1100px;margin:0 auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex:0 0 auto;border:1px solid transparent;background:transparent;color:var(--mut);padding:8px 14px;border-radius:9px;font-size:.82rem;font-weight:600;cursor:pointer;transition:.15s}
-.tab:hover{color:var(--txt)}
-.tab.active{background:var(--panel2);color:var(--txt);border-color:var(--line)}
+.tab{flex:0 0 auto;border:1px solid transparent;background:transparent;color:var(--mut);padding:10px 18px;border-radius:11px;font-size:.86rem;font-weight:700;cursor:pointer;transition:.15s}
+.tab:hover{color:var(--txt);background:var(--panel)}
+.tab.active{background:var(--panel);color:var(--blue);border-color:var(--line);box-shadow:var(--shadow)}
 
-main{max-width:1000px;margin:0 auto;padding:18px 14px}
-section{display:none;animation:fd .25s ease}
+/* ============ MAIN ============ */
+main{max-width:1100px;margin:0 auto;padding:22px 20px}
+section{display:none;animation:fd .22s ease}
 section.show{display:block}
-@keyframes fd{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+@keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
 
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;position:relative}
-.grid{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px;position:relative;box-shadow:var(--shadow-card)}
+.grid{display:grid;gap:14px}
 @media(min-width:660px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}}
 
-.stat{border-top:2px solid var(--line)}
+/* ============ STAT CARDS ============ */
+.stat{border-top:3px solid var(--line)}
 .stat.click{cursor:pointer;transition:.15s}
-.stat.click:hover{background:var(--panel2)}
-.stat.click::after{content:'ver detalhe ›';position:absolute;right:14px;bottom:10px;font-size:.6rem;color:var(--dim);font-weight:600}
-.stat .l{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:600;padding-right:22px}
-.stat .v{font-family:'JetBrains Mono';font-size:1.3rem;font-weight:600;margin-top:6px}
-.stat .h{font-size:.74rem;color:var(--mut);margin-top:4px;line-height:1.45;padding-bottom:10px}
+.stat.click:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(30,60,120,.18)}
+.stat.click::after{content:'ver detalhe ›';position:absolute;right:16px;bottom:12px;font-size:.65rem;color:var(--dim);font-weight:700}
+.stat .l{font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);font-weight:700;padding-right:24px}
+.stat .v{font-family:'JetBrains Mono';font-size:1.55rem;font-weight:700;margin-top:8px}
+.stat .h{font-size:.78rem;color:var(--mut);margin-top:5px;line-height:1.48;padding-bottom:14px}
 .c-green{color:var(--green)}.c-amber{color:var(--amber)}.c-red{color:var(--red)}.c-blue{color:var(--blue)}
 .stat.tg{border-top-color:var(--green)}.stat.ta{border-top-color:var(--amber)}
 .stat.tr{border-top-color:var(--red)}.stat.tb{border-top-color:var(--blue)}
 
-/* info tooltip */
-.info{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--dim);font-size:.68rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5}
-.info:hover{color:var(--txt);border-color:var(--mut)}
-.tip{display:none;margin-top:10px;padding:10px 12px;background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:9px;font-size:.74rem;color:var(--mut);line-height:1.55}
+.info{position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);background:var(--panel2);color:var(--mut);font-size:.72rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;transition:.15s}
+.info:hover{color:var(--txt);border-color:var(--blue)}
+.tip{display:none;margin-top:12px;padding:12px 14px;background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;font-size:.78rem;color:var(--mut);line-height:1.6}
 .card.tipon .tip{display:block}
 
-.stitle{font-size:.95rem;font-weight:700;margin:26px 0 10px;display:flex;align-items:baseline;gap:10px;font-family:'Space Grotesk'}
-.stitle small{font-weight:400;color:var(--dim);font-size:.72rem;font-family:'Inter'}
+.stitle{font-size:1.05rem;font-weight:700;margin:30px 0 12px;display:flex;align-items:baseline;gap:12px;font-family:'Space Grotesk';color:var(--txt)}
+.stitle small{font-weight:400;color:var(--dim);font-size:.76rem;font-family:'Inter'}
 .stitle::after{content:'';flex:1;height:1px;background:var(--line);align-self:center}
-.chart-box{height:230px;position:relative}
+.chart-box{height:240px;position:relative}
 .chart-click{cursor:pointer}
-.chart-hint{font-size:.62rem;color:var(--dim);text-align:center;margin-top:6px}
+.chart-hint{font-size:.66rem;color:var(--dim);text-align:center;margin-top:8px}
 
-.bigrow{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
-.bignum{font-family:'JetBrains Mono';font-size:1.9rem;font-weight:600}
-.progress{height:10px;border-radius:99px;background:var(--panel2);overflow:hidden;display:flex;margin-top:12px}
+.bigrow{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px}
+.bignum{font-family:'JetBrains Mono';font-size:2.2rem;font-weight:700}
+.progress{height:12px;border-radius:99px;background:var(--panel2);overflow:hidden;display:flex;margin-top:14px;border:1px solid var(--line)}
 .progress div{transition:width .4s ease}
-.plegend{display:flex;gap:16px;flex-wrap:wrap;margin-top:9px;font-size:.72rem;color:var(--mut)}
-.plegend b{color:var(--txt);font-family:'JetBrains Mono';font-weight:500}
-.dotl{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px}
+.plegend{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font-size:.78rem;color:var(--mut)}
+.plegend b{color:var(--txt);font-family:'JetBrains Mono';font-weight:600}
+.dotl{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px}
 
-.checkin{border-color:var(--amber);border-left-width:3px}
-.checkin h3{font-size:.92rem}
-.paybtn{background:var(--green);color:var(--ink);border:none;border-radius:9px;padding:8px 13px;font-size:.74rem;font-weight:700;cursor:pointer}
+/* ============ CHECKIN ============ */
+.checkin{border-color:var(--amber);border-left:4px solid var(--amber)}
+.checkin h3{font-size:1rem}
+.paybtn{background:var(--green);color:#fff;border:none;border-radius:10px;padding:9px 15px;font-size:.78rem;font-weight:700;cursor:pointer;transition:.15s}
+.paybtn:hover{filter:brightness(1.08)}
 
-.filtros{display:flex;gap:7px;flex-wrap:wrap;margin:4px 0 14px}
-.chip{border:1px solid var(--line);background:var(--panel);color:var(--mut);padding:7px 13px;border-radius:9px;font-size:.75rem;font-weight:600;cursor:pointer;transition:.15s}
-.chip.on{background:var(--panel2);color:var(--txt);border-color:#3A4557}
-.chip .n{font-family:'JetBrains Mono';opacity:.8;font-weight:500}
+/* ============ CHIPS / FILTROS ============ */
+.filtros{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px}
+.chip{border:1px solid var(--line);background:var(--panel);color:var(--mut);padding:9px 16px;border-radius:10px;font-size:.8rem;font-weight:700;cursor:pointer;transition:.15s;box-shadow:var(--shadow)}
+.chip.on{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 4px 14px rgba(53,112,196,.30)}
+.chip .n{font-family:'JetBrains Mono';opacity:.85;font-weight:600}
 
-.ledger{display:flex;flex-direction:column;gap:7px}
-.row{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;transition:.15s}
-.row.paga{border-left:3px solid var(--green)}
-.row.atraso{border-left:3px solid var(--red)}
-.row.futura{border-left:3px solid var(--line)}
-.rtop{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;cursor:pointer}
-.check{width:28px;height:28px;border-radius:8px;border:1.5px solid var(--line);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;background:transparent;color:transparent;transition:.15s}
-.row.paga .check{background:var(--green);border-color:var(--green);color:var(--ink)}
+/* ============ LEDGER ============ */
+.ledger{display:flex;flex-direction:column;gap:9px}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:.15s;box-shadow:var(--shadow)}
+.row.paga{border-left:4px solid var(--green)}
+.row.atraso{border-left:4px solid var(--red)}
+.row.futura{border-left:4px solid var(--line)}
+.rtop{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;cursor:pointer}
+.check{width:32px;height:32px;border-radius:9px;border:2px solid var(--line);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;background:transparent;color:transparent;transition:.15s}
+.row.paga .check{background:var(--green);border-color:var(--green);color:#fff}
 .row.atraso .check{border-color:var(--red)}
-.rinfo .t{font-weight:600;font-size:.85rem}
-.rinfo .d{font-size:.7rem;color:var(--dim);font-family:'JetBrains Mono';margin-top:3px}
+.rinfo .t{font-weight:700;font-size:.92rem}
+.rinfo .d{font-size:.74rem;color:var(--dim);font-family:'JetBrains Mono';margin-top:4px}
 .rval{text-align:right}
-.rval .v{font-family:'JetBrains Mono';font-weight:600;font-size:.9rem}
+.rval .v{font-family:'JetBrains Mono';font-weight:700;font-size:.98rem}
 .row.paga .rval .v{color:var(--green)}
 .row.atraso .rval .v{color:var(--red)}
-.rval .s{font-size:.64rem;color:var(--dim);margin-top:3px}
-.badge{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.05em;padding:2px 7px;border-radius:5px;margin-left:6px;vertical-align:1px;border:1px solid}
-.b-vic{color:var(--amber);border-color:var(--amber);background:rgba(201,162,84,.08)}
-.b-cx{color:var(--blue);border-color:var(--blue);background:rgba(107,147,200,.08)}
-.redit{display:none;border-top:1px solid var(--line);margin-top:11px;padding-top:11px}
+.rval .s{font-size:.68rem;color:var(--dim);margin-top:3px}
+.badge{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.05em;padding:2px 7px;border-radius:5px;margin-left:6px;vertical-align:1px;border:1px solid}
+.b-vic{color:var(--amber);border-color:var(--amber);background:rgba(196,127,23,.1)}
+.b-cx{color:var(--blue);border-color:var(--blue);background:rgba(53,112,196,.1)}
+.redit{display:none;border-top:1px solid var(--line);margin-top:13px;padding-top:13px}
 .row.open .redit{display:block}
-.redit .fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.redit label,.form label{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);font-weight:700;display:block;margin-bottom:4px}
-.redit .obs{font-size:.74rem;color:var(--mut);margin-top:9px;line-height:1.55}
-.redit .brk{margin-top:9px}
-input,select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:9px;color:var(--txt);padding:9px 11px;font-size:.84rem;font-family:'JetBrains Mono',monospace}
-input:focus,select:focus{outline:1.5px solid var(--blue);border-color:transparent}
+.redit .fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.redit label,.form label{font-size:.66rem;text-transform:uppercase;letter-spacing:.09em;color:var(--mut);font-weight:700;display:block;margin-bottom:5px}
+.redit .obs{font-size:.78rem;color:var(--mut);margin-top:10px;line-height:1.55}
+.redit .brk{margin-top:10px}
+input,select{width:100%;background:var(--panel2);border:1.5px solid var(--line);border-radius:10px;color:var(--txt);padding:10px 13px;font-size:.9rem;font-family:'JetBrains Mono',monospace;transition:.15s}
+input:focus,select:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(53,112,196,.12)}
 select{font-family:'Inter'}
 
-.cx-row{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:7px;overflow:hidden}
-.cx-head{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:13px 15px;cursor:pointer}
-.cx-head .m{font-weight:600;font-size:.86rem;text-transform:capitalize}
-.cx-head .d{font-size:.68rem;color:var(--dim);font-family:'JetBrains Mono';margin-top:2px}
-.cx-head .v{font-family:'JetBrains Mono';font-weight:600;font-size:.9rem;text-align:right}
-.cx-head .who{font-size:.62rem;text-align:right;margin-top:2px;color:var(--dim)}
-.cx-head .arr{color:var(--dim);transition:.2s;font-size:.8rem}
+/* ============ CAIXA ROWS ============ */
+.cx-row{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:9px;overflow:hidden;box-shadow:var(--shadow)}
+.cx-head{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;padding:15px 17px;cursor:pointer;transition:.15s}
+.cx-head:hover{background:var(--panel2)}
+.cx-head .m{font-weight:700;font-size:.92rem;text-transform:capitalize}
+.cx-head .d{font-size:.72rem;color:var(--dim);font-family:'JetBrains Mono';margin-top:2px}
+.cx-head .v{font-family:'JetBrains Mono';font-weight:700;font-size:.95rem;text-align:right}
+.cx-head .who{font-size:.65rem;text-align:right;margin-top:2px;color:var(--mut)}
+.cx-head .arr{color:var(--dim);transition:.2s;font-size:.85rem}
 .cx-row.open .arr{transform:rotate(180deg)}
-.cx-body{display:none;border-top:1px solid var(--line);padding:13px 15px;background:var(--bg)}
+.cx-body{display:none;border-top:1px solid var(--line);padding:15px 17px;background:var(--panel2)}
 .cx-row.open .cx-body{display:block}
-.brk{display:grid;grid-template-columns:1fr auto;gap:5px 12px;font-size:.78rem}
+.brk{display:grid;grid-template-columns:1fr auto;gap:6px 14px;font-size:.82rem}
 .brk .k{color:var(--mut)}
 .brk .n{font-family:'JetBrains Mono';text-align:right;color:var(--txt)}
-.brk .tot{border-top:1px dashed var(--line);padding-top:6px;margin-top:3px;font-weight:600}
-.pagador{display:flex;gap:8px;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);flex-wrap:wrap}
-.pagador span{font-size:.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
-.pagador select{width:auto;padding:6px 10px;font-size:.76rem}
-.delbtn{background:none;border:1px solid var(--line);color:var(--red);border-radius:8px;padding:6px 11px;font-size:.7rem;font-weight:600;cursor:pointer;margin-left:auto}
+.brk .tot{border-top:1px dashed var(--line);padding-top:7px;margin-top:4px;font-weight:700}
+.pagador{display:flex;gap:10px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);flex-wrap:wrap}
+.pagador span{font-size:.7rem;color:var(--mut);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.pagador select{width:auto;padding:7px 12px;font-size:.8rem}
+.delbtn{background:none;border:1px solid #f5d5d5;color:var(--red);border-radius:9px;padding:7px 13px;font-size:.74rem;font-weight:700;cursor:pointer;margin-left:auto}
 
-.form .fg{margin-bottom:12px}
-.btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:var(--ink);font-weight:700;font-size:.84rem;padding:11px 18px;border-radius:10px;border:none;cursor:pointer;transition:.15s;text-decoration:none}
-.btn:hover{filter:brightness(1.08)}
-.btn.ghost{background:var(--panel);color:var(--txt);border:1px solid var(--line)}
-.btn.blue{background:var(--blue);color:var(--ink)}
-.lanc-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.82rem}
+/* ============ FORM / BUTTONS ============ */
+.form .fg{margin-bottom:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-weight:700;font-size:.9rem;padding:12px 20px;border-radius:11px;border:none;cursor:pointer;transition:.15s;text-decoration:none;box-shadow:0 4px 14px rgba(31,168,104,.25)}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn.ghost{background:var(--panel);color:var(--txt);border:1.5px solid var(--line);box-shadow:var(--shadow)}
+.btn.ghost:hover{background:var(--panel2)}
+.btn.blue{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(53,112,196,.25)}
+.lanc-item{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.86rem}
 .lanc-item:last-child{border:none}
-.lanc-item .x{background:none;border:none;color:var(--red);cursor:pointer;font-size:.95rem;padding:4px}
-details.addform{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-bottom:12px}
-details.addform summary{padding:13px 15px;cursor:pointer;font-weight:600;font-size:.85rem;list-style:none;display:flex;justify-content:space-between}
-details.addform summary::after{content:'+';color:var(--dim);font-weight:700}
+.lanc-item .x{background:none;border:1px solid #f5d5d5;color:var(--red);cursor:pointer;font-size:.9rem;padding:5px 9px;border-radius:8px;flex-shrink:0}
+.lanc-link{display:inline-flex;align-items:center;gap:4px;color:var(--blue);font-size:.72rem;font-weight:600;text-decoration:none;margin-top:3px}
+.lanc-link:hover{text-decoration:underline}
+details.addform{border:1.5px solid var(--line);border-radius:14px;background:var(--panel);margin-bottom:14px;box-shadow:var(--shadow)}
+details.addform summary{padding:15px 17px;cursor:pointer;font-weight:700;font-size:.9rem;list-style:none;display:flex;justify-content:space-between;color:var(--txt)}
+details.addform summary::after{content:'+';color:var(--blue);font-weight:700;font-size:1.1rem}
 details.addform[open] summary::after{content:'–'}
-details.addform .inner{padding:0 15px 15px;border-top:1px solid var(--line);padding-top:13px}
+details.addform .inner{padding:0 17px 17px;border-top:1px solid var(--line);padding-top:15px}
 
-/* modal */
-.overlay{position:fixed;inset:0;background:rgba(5,8,12,.75);backdrop-filter:blur(4px);z-index:100;display:none;align-items:flex-end;justify-content:center}
+/* ============ MODAL ============ */
+.overlay{position:fixed;inset:0;background:rgba(10,18,40,.55);backdrop-filter:blur(6px);z-index:100;display:none;align-items:flex-end;justify-content:center}
 @media(min-width:660px){.overlay{align-items:center}}
 .overlay.show{display:flex}
-.modal{background:var(--panel);border:1px solid var(--line);border-radius:18px 18px 0 0;width:100%;max-width:640px;max-height:86vh;overflow-y:auto;padding:20px;animation:slideup .25s ease}
-@media(min-width:660px){.modal{border-radius:18px}}
-@keyframes slideup{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
-.modal h3{font-size:1rem;margin-bottom:4px}
-.modal .msub{font-size:.75rem;color:var(--mut);margin-bottom:14px;line-height:1.5}
-.mclose{position:sticky;float:right;top:0;background:var(--panel2);border:1px solid var(--line);color:var(--txt);width:30px;height:30px;border-radius:9px;cursor:pointer;font-size:.9rem}
-.mtable{width:100%;font-size:.76rem;border-collapse:collapse}
-.mtable th{text-align:left;color:var(--dim);font-weight:600;text-transform:uppercase;font-size:.6rem;letter-spacing:.06em;padding:7px 8px;border-bottom:1px solid var(--line)}
-.mtable td{padding:7px 8px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono'}
+.modal{background:var(--panel);border:1.5px solid var(--line);border-radius:20px 20px 0 0;width:100%;max-width:660px;max-height:88vh;overflow-y:auto;padding:24px;animation:slideup .22s ease;box-shadow:0 -10px 50px rgba(30,60,120,.18)}
+@media(min-width:660px){.modal{border-radius:20px}}
+@keyframes slideup{from{transform:translateY(34px);opacity:0}to{transform:none;opacity:1}}
+.modal h3{font-size:1.1rem;margin-bottom:5px}
+.modal .msub{font-size:.8rem;color:var(--mut);margin-bottom:16px;line-height:1.5}
+.mclose{position:sticky;float:right;top:0;background:var(--panel2);border:1.5px solid var(--line);color:var(--txt);width:34px;height:34px;border-radius:10px;cursor:pointer;font-size:.9rem}
+.mtable{width:100%;font-size:.8rem;border-collapse:collapse}
+.mtable th{text-align:left;color:var(--mut);font-weight:700;text-transform:uppercase;font-size:.63rem;letter-spacing:.07em;padding:8px 9px;border-bottom:2px solid var(--line)}
+.mtable td{padding:8px 9px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono'}
 .mtable td:last-child,.mtable th:last-child{text-align:right}
-.mtable tr.hl td{color:var(--amber);font-weight:600}
+.mtable tr.hl td{color:var(--amber);font-weight:700}
 
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--txt);color:var(--ink);font-weight:600;font-size:.8rem;padding:11px 18px;border-radius:10px;transition:.3s;z-index:120;opacity:0}
+/* ============ TOAST ============ */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--txt);color:#fff;font-weight:700;font-size:.84rem;padding:13px 22px;border-radius:12px;transition:.3s;z-index:120;opacity:0;box-shadow:0 8px 30px rgba(0,0,0,.2)}
 .toast.show{transform:translateX(-50%);opacity:1}
 
-.faq-item{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-bottom:8px;overflow:hidden}
-.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--txt);font-weight:600;font-size:.86rem;padding:14px 15px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center;font-family:'Inter'}
-.faq-q .a{color:var(--dim);transition:.2s;flex-shrink:0}
+/* ============ FAQ ============ */
+.faq-item{border:1.5px solid var(--line);border-radius:14px;background:var(--panel);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow)}
+.faq-q{width:100%;text-align:left;background:none;border:none;color:var(--txt);font-weight:700;font-size:.92rem;padding:16px 17px;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center;font-family:'Inter'}
+.faq-q .a{color:var(--blue);transition:.2s;flex-shrink:0}
 .faq-item.open .a{transform:rotate(180deg)}
-.faq-body{max-height:0;overflow:hidden;transition:max-height .3s;font-size:.83rem;color:var(--mut);line-height:1.65}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .3s;font-size:.86rem;color:var(--mut);line-height:1.7}
 .faq-item.open .faq-body{max-height:700px}
-.faq-body .in{padding:0 15px 15px}
+.faq-body .in{padding:0 17px 17px}
 .faq-body b{color:var(--txt)}
 .faq-body .mono{color:var(--amber)}
 
-.specs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+/* ============ SPECS ============ */
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(min-width:660px){.specs{grid-template-columns:repeat(3,1fr)}}
-.spec{background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px}
-.spec .k{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:700}
-.spec .v{font-weight:600;margin-top:4px;font-size:.83rem;line-height:1.4}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.tag{background:var(--bg);border:1px solid var(--line);color:var(--mut);padding:6px 11px;border-radius:8px;font-size:.72rem;font-weight:500}
+.spec{background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:14px}
+.spec .k{font-size:.63rem;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);font-weight:700}
+.spec .v{font-weight:600;margin-top:5px;font-size:.88rem;line-height:1.4;color:var(--txt)}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.tag{background:var(--panel2);border:1.5px solid var(--line);color:var(--mut);padding:7px 13px;border-radius:9px;font-size:.76rem;font-weight:600}
 
-footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-size:.68rem;text-align:center;line-height:1.6}
+/* ============ WIDGETS ============ */
+.widgets-grid{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media(max-width:659px){.widgets-grid{grid-template-columns:1fr}}
+.widget-card{background:var(--panel);border:1.5px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow-card)}
+.widget-title{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;color:var(--txt);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.widget-icon{font-size:1.2rem}
+/* weather widget */
+.weather-big{font-family:'JetBrains Mono';font-size:2.8rem;font-weight:700;color:var(--blue);line-height:1}
+.weather-desc{font-size:.86rem;color:var(--mut);margin-top:4px}
+.weather-loc{font-size:.72rem;color:var(--dim);margin-top:2px}
+/* savings goal */
+.goal-bar{height:14px;border-radius:99px;background:var(--panel2);overflow:hidden;border:1px solid var(--line);margin:10px 0}
+.goal-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green),#5ee8b0);transition:width .6s ease}
+.goal-val{font-family:'JetBrains Mono';font-size:1.4rem;font-weight:700;color:var(--green)}
+.goal-sub{font-size:.76rem;color:var(--mut);margin-top:4px}
+/* note widget */
+.note-area{width:100%;min-height:90px;resize:vertical;background:var(--panel2);border:1.5px solid var(--line);border-radius:10px;color:var(--txt);padding:10px 12px;font-size:.86rem;font-family:'Inter';line-height:1.55}
+.note-area:focus{outline:none;border-color:var(--blue)}
+.note-save{margin-top:8px;background:var(--blue);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-size:.8rem;font-weight:700;cursor:pointer}
+/* checklist widget */
+.wish-input-row{display:flex;gap:8px;margin-bottom:10px}
+.wish-input{flex:1}
+.wish-add{background:var(--blue);color:#fff;border:none;border-radius:9px;padding:9px 14px;font-weight:700;cursor:pointer;font-size:.84rem;flex-shrink:0}
+.wish-item{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.86rem}
+.wish-item:last-child{border:none}
+.wish-check{width:20px;height:20px;border-radius:6px;border:2px solid var(--line);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:transparent;font-size:.75rem;color:transparent;transition:.15s}
+.wish-check.done{background:var(--green);border-color:var(--green);color:#fff}
+.wish-text{flex:1;transition:.2s}
+.wish-text.done{text-decoration:line-through;color:var(--dim)}
+.wish-del{background:none;border:none;color:var(--red);cursor:pointer;font-size:.9rem;padding:3px 6px;opacity:.7}
+.wish-del:hover{opacity:1}
+/* m2 cost widget */
+.m2-val{font-family:'JetBrains Mono';font-size:1.6rem;font-weight:700;color:var(--amber)}
+.m2-sub{font-size:.78rem;color:var(--mut);margin-top:4px}
+
+/* ============ MISC ============ */
+footer{max-width:1100px;margin:30px auto 0;padding:0 20px;color:var(--dim);font-size:.72rem;text-align:center;line-height:1.7}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ============ DATE MODAL ============ */
+#cdModal{position:fixed;inset:0;background:rgba(10,18,40,.55);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+#cdModal.show{display:flex}
+.cd-modal-box{background:var(--panel);border:1.5px solid var(--line);border-radius:20px;padding:28px;width:100%;max-width:360px;box-shadow:0 20px 60px rgba(30,60,120,.25)}
+.cd-modal-box h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;margin-bottom:16px}
+.cd-modal-box input[type=date]{margin-bottom:14px}
+.cd-modal-btns{display:flex;gap:10px}
 </style>
 </head>
 <body>
 
+<!-- ============ LOGIN SCREEN ============ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <span class="login-heart">🏠❤️</span>
+    <div class="login-title">Talita &amp; Magno</div>
+    <div class="login-sub">Painel do Apê 1302 · Acesso privado</div>
+    <div class="login-field">
+      <label>Usuário</label>
+      <input type="text" id="loginUser" placeholder="usuário" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="login-field">
+      <label>Senha</label>
+      <input type="password" id="loginPass" placeholder="senha" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" onclick="doLogin()">Entrar 🔑</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- ============ DATE CHANGE MODAL ============ -->
+<div id="cdModal">
+  <div class="cd-modal-box">
+    <h3>🗓️ Data prevista de entrega</h3>
+    <label style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--mut);display:block;margin-bottom:6px">Nova data</label>
+    <input type="date" id="cdDateInput">
+    <div class="cd-modal-btns">
+      <button class="btn" onclick="saveCdDate()" style="flex:1">Salvar</button>
+      <button class="btn ghost" onclick="document.getElementById('cdModal').classList.remove('show')" style="flex:1">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
 <header>
   <div>
-    <div class="eyebrow">Eco Vic Ville · Bloco 02</div>
-    <h1>Apto 1302 — Painel Financeiro</h1>
-    <div class="sub">Magno &amp; Talita · toque nos cards e gráficos para ver o detalhe</div>
+    <div class="eyebrow">Eco Vic Ville · Bloco 02 · Apto 1302</div>
+    <h1>Painel Financeiro</h1>
+    <div class="couple-tag">Talita ❤️ Magno</div>
   </div>
   <div class="hbtns">
-    <button class="mini pri" onclick="exportJSON()">Backup .json</button>
-    <button class="mini" onclick="el('impFile').click()">Importar</button>
-    <button class="mini" onclick="exportHTML()">HTML completo</button>
-    <button class="mini" onclick="resetAll()">Reset</button>
-    <input type="file" id="impFile" accept=".json" style="display:none" onchange="importJSON(event)">
+    <button class="mini pri" onclick="exportHTML()">💾 Salvar</button>
+    <button class="mini danger" onclick="resetAll()">⟳ Reset</button>
   </div>
 </header>
 
+<!-- ============ COUNTDOWN ============ -->
+<div id="countdownBanner">
+  <div>
+    <div class="cd-label">⏳ Contagem regressiva</div>
+    <div class="cd-title">Entrega das Chaves do Apartamento 🗝️</div>
+    <div class="cd-units" id="cdUnits">
+      <div class="cd-unit"><div class="cd-num" id="cdM">--</div><div class="cd-lbl">meses</div></div>
+      <div class="cd-unit"><div class="cd-num" id="cdW">--</div><div class="cd-lbl">semanas</div></div>
+      <div class="cd-unit"><div class="cd-num" id="cdD">--</div><div class="cd-lbl">dias</div></div>
+      <div class="cd-unit"><div class="cd-num" id="cdH">--</div><div class="cd-lbl">horas</div></div>
+    </div>
+  </div>
+  <button class="cd-btn" onclick="openCdModal()">✏️ Alterar data</button>
+</div>
+
+<!-- ============ NAV ============ -->
 <nav><div class="tabs">
-  <button class="tab active" data-tab="resumo">Resumo</button>
-  <button class="tab" data-tab="caixa">Extrato Caixa</button>
-  <button class="tab" data-tab="vic">Parcelas VIC</button>
-  <button class="tab" data-tab="lancar">Lançar</button>
-  <button class="tab" data-tab="imovel">Imóvel</button>
-  <button class="tab" data-tab="faq">FAQ</button>
+  <button class="tab active" data-tab="resumo">📊 Resumo</button>
+  <button class="tab" data-tab="caixa">🏦 Extrato Caixa</button>
+  <button class="tab" data-tab="vic">📋 Parcelas VIC</button>
+  <button class="tab" data-tab="lancar">➕ Lançar</button>
+  <button class="tab" data-tab="widgets">🧩 Gadgets</button>
+  <button class="tab" data-tab="imovel">🏢 Imóvel</button>
+  <button class="tab" data-tab="faq">❓ FAQ</button>
 </div></nav>
 
 <main>
@@ -225,8 +368,8 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
   <div class="card" id="cardInvest">
     <button class="info" onclick="tip(this)">i</button>
     <div class="bigrow">
-      <div><div class="bignum c-green" id="totInvest">—</div><div style="font-size:.75rem;color:var(--mut);margin-top:2px">soma de tudo que você pagou até hoje</div></div>
-      <div style="text-align:right"><div class="mono" style="font-size:1.1rem;color:var(--amber)" id="totFalta">—</div><div style="font-size:.72rem;color:var(--dim)">ainda a desembolsar (até <span id="totFim">—</span>)</div></div>
+      <div><div class="bignum c-green" id="totInvest">—</div><div style="font-size:.8rem;color:var(--mut);margin-top:4px">soma de tudo que você pagou até hoje</div></div>
+      <div style="text-align:right"><div class="mono" style="font-size:1.25rem;color:var(--amber)" id="totFalta">—</div><div style="font-size:.76rem;color:var(--dim)">ainda a desembolsar (até <span id="totFim">—</span>)</div></div>
     </div>
     <div class="progress"><div id="pbVic" style="background:var(--amber)"></div><div id="pbCx" style="background:var(--blue)"></div><div id="pbAv" style="background:var(--green)"></div></div>
     <div class="plegend">
@@ -234,7 +377,7 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
       <span><span class="dotl" style="background:var(--blue)"></span>Caixa: <b id="lgCx">—</b></span>
       <span><span class="dotl" style="background:var(--green)"></span>Avulsos: <b id="lgAv">—</b></span>
     </div>
-    <div class="tip">Entram aqui: sinal, mensais VIC, reembolsos de evolução, prestações Caixa marcadas como "pagas por você" e lançamentos avulsos. NÃO entram: o repasse do financiamento (R$ 294 mil que o banco paga à obra) e prestações que a construtora cobriu — porque não saíram do seu bolso.</div>
+    <div class="tip">Entram aqui: sinal, mensais VIC, reembolsos de evolução, prestações Caixa marcadas como "pagas por você" e lançamentos avulsos. NÃO entram: o repasse do financiamento (R$ 294 mil que o banco paga à obra) e prestações que a construtora cobriu.</div>
   </div>
 
   <div class="stitle">Situação agora <small>toque em um card para abrir o detalhe</small></div>
@@ -250,12 +393,12 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
     <div class="card"><button class="info" onclick="tip(this)">i</button>
       <div class="chart-box chart-click" onclick="openDetail('split')"><canvas id="chSplit"></canvas></div>
       <div class="chart-hint">toque para ver a tabela</div>
-      <div class="tip">Divide o seu desembolso entre a construtora (sinal + mensais + reembolsos), o banco (evoluções de obra pagas por você) e avulsos (ITBI, cartório etc.).</div>
+      <div class="tip">Divide o seu desembolso entre a construtora (sinal + mensais + reembolsos), o banco (evoluções de obra pagas por você) e avulsos.</div>
     </div>
     <div class="card"><button class="info" onclick="tip(this)">i</button>
       <div class="chart-box chart-click" onclick="openDetail('anos')"><canvas id="chAno"></canvas></div>
       <div class="chart-hint">toque para ver ano a ano</div>
-      <div class="tip">Projeção do que ainda sai do seu bolso em parcelas VIC por ano, usando o valor estimado com o reajuste de 08/2026 (R$ 1.124,34/mês). O valor real muda a cada reajuste do INCC — edite ao pagar.</div>
+      <div class="tip">Projeção do que ainda sai do seu bolso em parcelas VIC por ano, usando o valor estimado com o reajuste de 08/2026.</div>
     </div>
   </div>
 </section>
@@ -272,15 +415,15 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
   <div class="stitle">Composição do que foi pago <small>cada taxa somada em todas as prestações</small></div>
   <div class="grid g2">
     <div class="card"><button class="info" onclick="tip(this)">i</button><div class="brk" id="cxBrk"></div>
-      <div class="tip">Nenhum centavo disso amortiza o financiamento — são encargos da fase de obra sobre o valor já liberado. A amortização real começa nas 360 prestações após a entrega.</div></div>
+      <div class="tip">Nenhum centavo disso amortiza o financiamento — são encargos da fase de obra sobre o valor já liberado.</div></div>
     <div class="card"><div class="chart-box"><canvas id="chCxComp"></canvas></div></div>
   </div>
 
   <div class="stitle">Evolução mês a mês</div>
   <div class="card"><button class="info" onclick="tip(this)">i</button>
-    <div class="chart-box chart-click" style="height:260px" onclick="openDetail('saldo')"><canvas id="chCxMes"></canvas></div>
+    <div class="chart-box chart-click" style="height:270px" onclick="openDetail('saldo')"><canvas id="chCxMes"></canvas></div>
     <div class="chart-hint">toque para ver a tabela do saldo devedor</div>
-    <div class="tip">Barras: componentes de cada prestação (juros, correção, seguro+tarifa, mora). Linha verde: saldo devedor projetado — ele SOBE porque a Caixa vai liberando mais dinheiro à obra a cada medição, não porque você deve mais por atraso.</div>
+    <div class="tip">Barras: componentes de cada prestação (juros, correção, seguro+tarifa, mora). Linha verde: saldo devedor projetado.</div>
   </div>
 
   <div class="stitle">Adicionar nova prestação <small>copie os campos do app/site da Caixa</small></div>
@@ -303,7 +446,7 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
       </div>
       <div class="fg"><label>Saldo devedor projetado no vencimento</label><input id="cxSaldo" type="number" step="0.01" placeholder="0,00"></div>
       <button class="btn blue" onclick="addCx()">Adicionar ao extrato</button>
-      <p style="font-size:.7rem;color:var(--dim);margin-top:8px">Deixe "Valor quitado" vazio para usar a soma dos componentes.</p>
+      <p style="font-size:.74rem;color:var(--dim);margin-top:10px">Deixe "Valor quitado" vazio para usar a soma dos componentes.</p>
     </div>
   </details>
 
@@ -313,13 +456,13 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
 
 <!-- ================= PARCELAS VIC ================= -->
 <section id="vic">
-  <div class="grid g3" style="margin-bottom:14px">
+  <div class="grid g3" style="margin-bottom:16px">
     <div class="card stat ta"><div class="l">Pago à VIC</div><div class="v c-amber" id="vTotPago">—</div><div class="h" id="vTotPagoH">—</div></div>
     <div class="card stat tb"><div class="l">Correção INCC embutida</div><div class="v c-blue" id="vCor">—</div><div class="h">quanto as mensais pagas subiram acima dos R$ 975,19 originais</div></div>
     <div class="card stat tg"><div class="l">Falta pagar à VIC</div><div class="v c-green" id="vFalta">—</div><div class="h" id="vFaltaH">—</div></div>
   </div>
-  <p style="font-size:.78rem;color:var(--mut);margin-bottom:10px;line-height:1.5">
-    Toque no <b class="c-green">✓</b> para marcar como paga (data de hoje). Toque na linha para editar data, valor real e ver a composição.
+  <p style="font-size:.82rem;color:var(--mut);margin-bottom:12px;line-height:1.5">
+    Toque no <b class="c-green">✓</b> para marcar como paga (data de hoje). Toque na linha para editar data e valor.
   </p>
   <div class="filtros">
     <button class="chip on" data-f="todas">Todas <span class="n" id="nT"></span></button>
@@ -333,8 +476,8 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
 <!-- ================= LANÇAR ================= -->
 <section id="lancar">
   <div class="card form">
-    <h2 style="font-size:1rem;margin-bottom:14px">Lançar pagamento avulso</h2>
-    <div class="fg"><label>Descrição</label><input id="fDesc" placeholder="Ex.: condomínio, mudança, reforma..." style="font-family:'Inter'"></div>
+    <h2 style="font-size:1.1rem;margin-bottom:16px">➕ Lançar pagamento avulso</h2>
+    <div class="fg"><label>Descrição</label><input id="fDesc" placeholder="Ex.: geladeira, mudança, reforma..." style="font-family:'Inter'"></div>
     <div class="grid g2">
       <div class="fg"><label>Valor (R$)</label><input id="fVal" type="number" step="0.01" placeholder="0,00"></div>
       <div class="fg"><label>Data</label><input id="fData" type="date"></div>
@@ -344,26 +487,88 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
       <div class="fg"><label>Categoria</label><select id="fCat">
         <option>ITBI / impostos</option><option>Cartório / registro</option><option>Condomínio</option>
         <option>Evolução de obra</option><option>Acordo / renegociação</option><option>Mudança</option>
-        <option>Reforma / móveis</option><option>Outros</option></select></div>
+        <option>Reforma / móveis</option><option>Eletrodomésticos</option><option>Decoração</option><option>Outros</option></select></div>
     </div>
-    <button class="btn" onclick="addLanc()">Adicionar</button>
-    <p style="font-size:.7rem;color:var(--dim);margin-top:9px">Dica: o ITBI que você pagou (R$ 3.162,72 em set/24) pode entrar aqui para compor o investimento total.</p>
+    <div class="fg"><label>Link do produto / compra (opcional)</label><input id="fLink" type="url" placeholder="https://..." style="font-family:'Inter'"></div>
+    <button class="btn" onclick="addLanc()">Adicionar lançamento</button>
+    <p style="font-size:.74rem;color:var(--dim);margin-top:10px">💡 O ITBI pago (R$ 3.162,72 em set/24) pode entrar aqui para compor o investimento total.</p>
   </div>
   <div class="stitle">Lançamentos avulsos</div>
   <div class="card" id="lancList"></div>
-  <div class="stitle">Backup e portabilidade</div>
-  <div class="card" style="font-size:.8rem;color:var(--mut);line-height:1.7">
-    <b style="color:var(--txt)">Backup .json (recomendado)</b> — arquivo minúsculo (poucos KB) só com seus dados. Guarde ou mande no WhatsApp; para restaurar, use <b style="color:var(--txt)">Importar</b> em qualquer cópia deste app.<br>
-    <b style="color:var(--txt)">HTML completo</b> — o app inteiro com dados embutidos, para abrir em qualquer aparelho sem depender de nada.<br>
-    Suas marcações também ficam salvas automaticamente neste navegador.
+</section>
+
+<!-- ================= WIDGETS / GADGETS ================= -->
+<section id="widgets">
+  <div class="stitle">Ferramentas do Apê 🧩</div>
+  <div class="widgets-grid">
+
+    <!-- Custo por m² -->
+    <div class="widget-card">
+      <div class="widget-title"><span class="widget-icon">📐</span> Custo por m²</div>
+      <div class="m2-val" id="wM2">—</div>
+      <div class="m2-sub">Por m² de área privativa (61,27 m²)</div>
+      <div style="margin-top:12px;font-size:.78rem;color:var(--mut);line-height:1.6">
+        Avaliação Caixa: <b class="mono c-green">R$ 6.528/m²</b><br>
+        Diferença: <b class="mono c-green" id="wM2Diff">—</b> abaixo da avaliação
+      </div>
+    </div>
+
+    <!-- Nota do apartamento -->
+    <div class="widget-card">
+      <div class="widget-title"><span class="widget-icon">📝</span> Notas do casal</div>
+      <textarea class="note-area" id="noteArea" placeholder="Anote aqui ideias, planos de decoração, lista de compras..."></textarea>
+      <button class="note-save" onclick="saveNote()">Salvar nota ✓</button>
+    </div>
+
+    <!-- Lista de desejos para o apê -->
+    <div class="widget-card" style="grid-column:1/-1">
+      <div class="widget-title"><span class="widget-icon">🛋️</span> Lista de desejos para o Apê</div>
+      <div class="wish-input-row">
+        <input type="text" class="wish-input" id="wishInput" placeholder="Ex.: sofá de canto, ar-condicionado..." onkeydown="if(event.key==='Enter')addWish()">
+        <button class="wish-add" onclick="addWish()">+ Adicionar</button>
+      </div>
+      <div id="wishList"></div>
+    </div>
+
+    <!-- Linha do tempo do apê -->
+    <div class="widget-card" style="grid-column:1/-1">
+      <div class="widget-title"><span class="widget-icon">📅</span> Linha do tempo do Apê</div>
+      <div id="timeline" style="position:relative;padding-left:24px">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Resumo de investimento -->
+    <div class="widget-card">
+      <div class="widget-title"><span class="widget-icon">💰</span> Projeção de prestação pós-obra</div>
+      <div class="m2-val" style="color:var(--red)">≈ R$ 2.564</div>
+      <div class="m2-sub">Débito automático após entrega das chaves</div>
+      <div style="margin-top:12px;font-size:.78rem;color:var(--mut);line-height:1.7">
+        <b style="color:var(--txt)">Sistema:</b> PRICE · 360 meses<br>
+        <b style="color:var(--txt)">Taxa:</b> 9,79% a.a. (com relacionamento)<br>
+        <b style="color:var(--txt)">Indexador:</b> TR<br>
+        <b style="color:var(--txt)">Prazo final:</b> Agosto de 2054
+      </div>
+    </div>
+
+    <!-- FGTS reminder -->
+    <div class="widget-card">
+      <div class="widget-title"><span class="widget-icon">🏦</span> FGTS — Lembrete</div>
+      <div style="font-size:.86rem;color:var(--mut);line-height:1.75">
+        Após a entrega, o FGTS pode ser usado a cada <b style="color:var(--txt)">2 anos</b> para amortizar ou quitar o financiamento Caixa — sem multa.<br><br>
+        <b style="color:var(--txt)">FGTS Talita usado:</b> <span class="mono c-blue">R$ 7.626,70</span><br>
+        <b style="color:var(--txt)">Próximo uso:</b> após ago/2026 (estimado)
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- ================= IMÓVEL ================= -->
 <section id="imovel">
   <div class="card">
-    <h2 style="font-size:1rem">Ficha do imóvel</h2>
-    <div class="specs" style="margin-top:12px">
+    <h2 style="font-size:1.1rem">Ficha do imóvel</h2>
+    <div class="specs" style="margin-top:14px">
       <div class="spec"><div class="k">Unidade</div><div class="v">Apto 1302 · Bloco 02 (2S1) · 13º andar</div></div>
       <div class="spec"><div class="k">Empreendimento</div><div class="v">Gran Vic Amsterdã · Eco Vic Ville (Subcond. 1)</div></div>
       <div class="spec"><div class="k">Endereço</div><div class="v">Rod. Armando Salles, 525 · Tupy · Itapecerica da Serra/SP · CEP 06859-130</div></div>
@@ -382,15 +587,15 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
   <div class="stitle">A compra <small>como e por quanto</small></div>
   <div class="card">
     <div class="specs">
-      <div class="spec"><div class="k">Onde comprei</div><div class="v">Direto com a VIC Engenharia<br><a href="https://vicengenharia.com.br" target="_blank" style="color:var(--blue);font-size:.76rem">vicengenharia.com.br ↗</a></div></div>
+      <div class="spec"><div class="k">Onde comprei</div><div class="v">Direto com a VIC Engenharia<br><a href="https://vicengenharia.com.br" target="_blank" style="color:var(--blue);font-size:.8rem">vicengenharia.com.br ↗</a></div></div>
       <div class="spec"><div class="k">Data do contrato VIC</div><div class="v mono">26/07/2024 · venda nº 16203</div></div>
       <div class="spec"><div class="k">Contrato Caixa assinado</div><div class="v mono">26/08/2024 · Embu das Artes</div></div>
       <div class="spec"><div class="k">Valor de compra</div><div class="v mono">R$ 374.191,77</div></div>
       <div class="spec"><div class="k">Avaliação Caixa (jul/24)</div><div class="v mono c-green">R$ 400.000,00 (+R$ 25,8 mil)</div></div>
       <div class="spec"><div class="k">Campanha</div><div class="v">VIC TÁ ON · corretagem R$ 500</div></div>
     </div>
-    <div class="brk" style="margin-top:14px">
-      <div class="k" style="font-weight:600;color:var(--txt)">Composição do preço</div><div></div>
+    <div class="brk" style="margin-top:16px">
+      <div class="k" style="font-weight:700;color:var(--txt)">Composição do preço</div><div></div>
       <div class="k">Sinal (arras)</div><div class="n">R$ 13.349,21</div>
       <div class="k">60 mensais VIC (valor original)</div><div class="n">R$ 58.511,48</div>
       <div class="k">Financiamento Caixa</div><div class="n">R$ 294.204,38</div>
@@ -414,9 +619,9 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
   </div></div>
 
   <div class="stitle">Acabamentos e lazer</div>
-  <div class="card" style="font-size:.82rem;color:var(--mut);line-height:1.7">
+  <div class="card" style="font-size:.86rem;color:var(--mut);line-height:1.75">
     <b style="color:var(--txt)">Interno:</b> piso cimentado (sala/quartos), cerâmica PEI 4 até o teto nas áreas molhadas, bancada de granito com cuba inox, tanque 20 L, textura Ibratin/Coral, janelas de alumínio, porta-varanda de correr 1,50×2,20 m, tomada USB na sala, infra p/ ar-condicionado no quarto do casal, chuveiro 5.400 W, interfone.
-    <div class="tags" style="margin-top:10px">
+    <div class="tags" style="margin-top:12px">
       <span class="tag">Piscina c/ 2 cascatas</span><span class="tag">Espaço gourmet</span><span class="tag">Salão de festas c/ TV 43"</span>
       <span class="tag">Fitness completo</span><span class="tag">Quadra gramada</span><span class="tag">Playground</span>
       <span class="tag">Petplace</span><span class="tag">4 bicicletários</span><span class="tag">Portaria c/ biometria</span>
@@ -425,7 +630,7 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
   </div>
 
   <div class="stitle">Contatos e links</div>
-  <div class="card" style="display:flex;flex-wrap:wrap;gap:8px">
+  <div class="card" style="display:flex;flex-wrap:wrap;gap:10px">
     <a class="btn" href="https://vicengenharia.com.br/portal-do-cliente/" target="_blank">2ª via boleto VIC</a>
     <a class="btn ghost" href="https://wa.me/558004001195" target="_blank">WhatsApp VIC 0800 400-1195</a>
     <a class="btn ghost" href="mailto:relacionamento@vicengenharia.com.br">Assistência técnica</a>
@@ -445,18 +650,78 @@ footer{max-width:1000px;margin:26px auto 0;padding:0 18px;color:var(--dim);font-
 </div>
 
 <div class="toast" id="toast">Salvo</div>
-<footer>Fontes: ficha financeira VIC (17/07/2026) + extrato do app Caixa + contratos. Estimativas futuras — edite ao pagar.<br>Backup .json = leve e portátil · HTML completo = app inteiro com dados.</footer>
+<footer>Talita ❤️ Magno · Eco Vic Ville · Fontes: ficha financeira VIC (17/07/2026) + extrato do app Caixa + contratos.<br>Estimativas futuras — edite ao pagar. Dados salvos automaticamente no navegador.</footer>
 
 <script id="app-state" type="application/json">null</script>
 <script>
-/* ================= DADOS-BASE ================= */
+/* ============ LOGIN ============ */
+function doLogin(){
+  const u=document.getElementById('loginUser').value.trim();
+  const p=document.getElementById('loginPass').value;
+  if(u==='talita'&&p==='gostosa'){
+    document.getElementById('loginScreen').classList.add('hidden');
+    try{sessionStorage.setItem('apto1302auth','1')}catch(e){}
+  } else {
+    document.getElementById('loginErr').textContent='Usuário ou senha incorretos.';
+    document.getElementById('loginPass').value='';
+  }
+}
+(function(){
+  try{if(sessionStorage.getItem('apto1302auth')==='1')document.getElementById('loginScreen').classList.add('hidden')}catch(e){}
+})();
+
+/* ============ UTILS ============ */
 const fmt=v=>(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const hoje=new Date();hoje.setHours(0,0,0,0);
 const parseISO=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
 const brDate=s=>{if(!s)return'—';const[y,m,d]=s.split('-');return`${d}/${m}/${y.slice(2)}`};
 const mesNome=s=>parseISO(s).toLocaleDateString('pt-BR',{month:'short',year:'2-digit'}).replace('.','');
 const mesLongo=s=>parseISO(s).toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+const el=id=>document.getElementById(id);
+const statusOf=p=>p.pago?'paga':(parseISO(p.venc)<hoje?'atraso':'futura');
+function tip(btn){btn.closest('.card').classList.toggle('tipon')}
 
+/* ============ COUNTDOWN ============ */
+let cdTarget=null;
+function loadCdDate(){
+  try{const s=localStorage.getItem('apto1302cd');if(s){cdTarget=new Date(s);cdTarget.setHours(12,0,0,0)}}catch(e){}
+  if(!cdTarget){cdTarget=new Date('2026-12-01');cdTarget.setHours(12,0,0,0);}
+}
+function saveCdDate(){
+  const v=el('cdDateInput').value;
+  if(!v){toast('Informe uma data');return}
+  cdTarget=new Date(v);cdTarget.setHours(12,0,0,0);
+  try{localStorage.setItem('apto1302cd',cdTarget.toISOString())}catch(e){}
+  el('cdModal').classList.remove('show');
+  updateCountdown();toast('Data de entrega atualizada ✓');
+}
+function openCdModal(){
+  el('cdDateInput').value=cdTarget.toISOString().slice(0,10);
+  el('cdModal').classList.add('show');
+}
+function updateCountdown(){
+  const now=new Date();
+  const diff=cdTarget-now;
+  if(diff<=0){
+    el('cdM').textContent='🎉';el('cdW').textContent='0';el('cdD').textContent='0';el('cdH').textContent='0';return;
+  }
+  const totalHours=Math.floor(diff/3600000);
+  const totalDays=Math.floor(diff/86400000);
+  const months=Math.floor(totalDays/30.44);
+  const remAfterMonths=totalDays-Math.floor(months*30.44);
+  const weeks=Math.floor(remAfterMonths/7);
+  const days=remAfterMonths%7;
+  const hours=Math.floor((diff%(86400000))/3600000);
+  el('cdM').textContent=months;
+  el('cdW').textContent=weeks;
+  el('cdD').textContent=days;
+  el('cdH').textContent=hours;
+}
+loadCdDate();
+updateCountdown();
+setInterval(updateCountdown,60000);
+
+/* ============ DATA ============ */
 function caixaBase(){return [
  {venc:'2024-10-01',pagto:'2024-10-01',cor:40.57,jur:472.90,mip:28.24,tx:25,mora:0,quit:555.99,saldo:62864.80,pg:'voce',user:0},
  {venc:'2024-11-01',pagto:'2024-11-01',cor:67.53,jur:519.84,mip:28.24,tx:25,mora:0,quit:621.64,saldo:98821.69,pg:'voce',user:0},
@@ -501,21 +766,57 @@ function vicBase(){
   add('m60','Mensal 60 (final)','2029-08-10',1124.44,0,null,null,'Última parcela do plano VIC.');
   return P;
 }
-function defaultState(){return {vic:vicBase(),cx:caixaBase(),lancs:[]};}
+function defaultState(){return {vic:vicBase(),cx:caixaBase(),lancs:[],note:'',wishes:[]};}
 
 let S;
 (function(){
   let emb=null;try{emb=JSON.parse(document.getElementById('app-state').textContent)}catch(e){}
-  let ls=null;try{ls=JSON.parse(localStorage.getItem('apto1302v4'))}catch(e){}
+  let ls=null;try{ls=JSON.parse(localStorage.getItem('apto1302v5'))}catch(e){}
   S=ls||emb||defaultState();
+  if(!S.note)S.note='';
+  if(!S.wishes)S.wishes=[];
 })();
-function persist(){try{localStorage.setItem('apto1302v4',JSON.stringify(S))}catch(e){}recalc()}
-function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
-const el=id=>document.getElementById(id);
-const statusOf=p=>p.pago?'paga':(parseISO(p.venc)<hoje?'atraso':'futura');
-function tip(btn){btn.closest('.card').classList.toggle('tipon')}
 
-/* ================= RECÁLCULO ================= */
+function persist(){
+  try{localStorage.setItem('apto1302v5',JSON.stringify(S))}catch(e){}
+  recalc();
+}
+
+function toast(m){const t=el('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
+
+/* ============ SAVE (clean HTML export) ============ */
+function exportHTML(){
+  // Build a clean serializable state snapshot
+  const stateSnap=JSON.stringify(S);
+
+  // Get the current HTML source, inject the state, and strip script injections
+  const src=document.documentElement.outerHTML;
+
+  // Replace the app-state script tag content
+  const clean=src.replace(
+    /<script id="app-state"[^>]*>[\s\S]*?<\/script>/,
+    `<script id="app-state" type="application/json">${stateSnap}<\/script>`
+  );
+
+  const blob=new Blob(['<!DOCTYPE html>\n'+clean],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`apto-1302_${hoje.toISOString().slice(0,10)}.html`;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);document.body.removeChild(a)},300);
+  toast('💾 Arquivo salvo com sucesso!');
+}
+
+function resetAll(){
+  if(!confirm('Apagar suas marcações e voltar aos dados originais?'))return;
+  S=defaultState();
+  try{localStorage.removeItem('apto1302v5')}catch(e){}
+  recalc();
+  toast('Dados restaurados');
+}
+
+/* ============ RECÁLCULO ============ */
 let charts={},D={};
 function recalc(){
   const vicPago=S.vic.filter(p=>p.pago).reduce((s,p)=>s+(p.valPago??p.val),0);
@@ -568,7 +869,7 @@ function recalc(){
     <div class="k">Tarifa adm. (${cxOrd.length} × R$ 25)</div><div class="n">${fmt(tTx)}</div>
     <div class="k">Encargos de atraso</div><div class="n c-red">${fmt(tMora)}</div>
     <div class="k tot">Total quitado</div><div class="n tot c-blue">${fmt(cxTot)}</div>
-    <div class="k" style="font-size:.7rem;padding-top:6px">Prestação média</div><div class="n" style="font-size:.7rem;padding-top:6px">${fmt(cxTot/cxOrd.length)}</div>`;
+    <div class="k" style="font-size:.74rem;padding-top:6px">Prestação média</div><div class="n" style="font-size:.74rem;padding-top:6px">${fmt(cxTot/cxOrd.length)}</div>`;
 
   el('vTotPago').textContent=fmt(vicPago);
   el('vTotPagoH').textContent=S.vic.filter(p=>p.pago).length+' lançamentos baixados';
@@ -576,7 +877,12 @@ function recalc(){
   el('vFalta').textContent=fmt(falta);
   el('vFaltaH').textContent=futuras.length+' parcelas · última '+(futuras.length?brDate(futuras[futuras.length-1].venc):'—');
 
+  // m2 widget
+  const custom2=invest/61.27;
+  if(el('wM2')){el('wM2').textContent=fmt(custom2)+'/m²';el('wM2Diff').textContent=fmt(400000/61.27-custom2)+'/m²';}
+
   renderCheckin();renderCxList();renderLedger(currentFilter);renderLancs();renderCharts();
+  renderWidgets();
 }
 
 /* ---- check-in ---- */
@@ -585,18 +891,18 @@ function renderCheckin(){
   const doMes=S.vic.filter(p=>{const d=parseISO(p.venc);return d.getMonth()===m&&d.getFullYear()===y});
   const pend=doMes.filter(p=>!p.pago);
   const nome=hoje.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
-  let h=`<h3>Check-in de ${nome}</h3>`;
-  if(!doMes.length)h+=`<p style="font-size:.8rem;color:var(--mut);margin-top:6px">Nenhuma parcela VIC vence neste mês.</p>`;
-  else if(!pend.length)h+=`<p style="font-size:.8rem;color:var(--green);margin-top:6px;font-weight:600">Tudo pago neste mês ✓</p>`;
-  else{h+=`<p style="font-size:.76rem;color:var(--mut);margin:5px 0 8px">Pendências do mês:</p>`;
-    pend.forEach(p=>{h+=`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)">
-      <div style="font-size:.83rem"><b>${p.t}</b> <span class="mono" style="color:var(--dim);font-size:.7rem">venc. ${brDate(p.venc)}</span></div>
-      <div style="display:flex;gap:8px;align-items:center"><span class="mono" style="font-size:.83rem;color:var(--amber)">${fmt(p.val)}</span>
+  let h=`<h3>📅 Check-in de ${nome}</h3>`;
+  if(!doMes.length)h+=`<p style="font-size:.84rem;color:var(--mut);margin-top:8px">Nenhuma parcela VIC vence neste mês.</p>`;
+  else if(!pend.length)h+=`<p style="font-size:.84rem;color:var(--green);margin-top:8px;font-weight:700">✅ Tudo pago neste mês!</p>`;
+  else{h+=`<p style="font-size:.8rem;color:var(--mut);margin:6px 0 10px">Pendências do mês:</p>`;
+    pend.forEach(p=>{h+=`<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)">
+      <div style="font-size:.88rem"><b>${p.t}</b> <span class="mono" style="color:var(--dim);font-size:.74rem">venc. ${brDate(p.venc)}</span></div>
+      <div style="display:flex;gap:10px;align-items:center"><span class="mono" style="font-size:.88rem;color:var(--amber);font-weight:700">${fmt(p.val)}</span>
       <button class="paybtn" onclick="quickPay('${p.id}')">Paguei ✓</button></div></div>`})}
   el('checkinCard').innerHTML=h;
 }
 function quickPay(id){const p=S.vic.find(x=>x.id===id);if(!p)return;
-  p.pago=true;p.dataPag=hoje.toISOString().slice(0,10);p.valPago=p.valPago??p.val;persist();toast(p.t+' marcada como paga')}
+  p.pago=true;p.dataPag=hoje.toISOString().slice(0,10);p.valPago=p.valPago??p.val;persist();toast(p.t+' marcada como paga ✓')}
 
 /* ---- extrato caixa ---- */
 function renderCxList(){
@@ -677,13 +983,13 @@ function renderLedger(f){
           <div><label>Data do pagamento</label><input type="date" value="${p.dataPag||''}" data-e="data"></div>
           <div><label>Valor pago (R$)</label><input type="number" step="0.01" value="${p.valPago??p.val}" data-e="valor"></div>
         </div>
-        ${isM?`<div class="brk"><div class="k">Valor original (contrato)</div><div class="n">R$ 975,19</div>
+        ${isM?`<div class="brk" style="margin-top:10px"><div class="k">Valor original (contrato)</div><div class="n">R$ 975,19</div>
         <div class="k">Correção INCC embutida</div><div class="n c-blue">${fmt(vAtual-975.19)}</div></div>`:''}
         ${p.obs?`<div class="obs">${p.obs}</div>`:''}
       </div>`;
     row.querySelector('.check').addEventListener('click',e=>{e.stopPropagation();
       p.pago=!p.pago;
-      if(p.pago){p.dataPag=p.dataPag||hoje.toISOString().slice(0,10);p.valPago=p.valPago??p.val;toast(p.t+' paga')}
+      if(p.pago){p.dataPag=p.dataPag||hoje.toISOString().slice(0,10);p.valPago=p.valPago??p.val;toast(p.t+' paga ✓')}
       else toast(p.t+' desmarcada');persist()});
     row.querySelector('.rtop').addEventListener('click',()=>row.classList.toggle('open'));
     row.querySelectorAll('input').forEach(inp=>{
@@ -700,58 +1006,134 @@ document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
 /* ---- lançamentos ---- */
 function addLanc(){
   const d=el('fDesc').value.trim(),v=parseFloat(el('fVal').value),dt=el('fData').value;
+  const link=el('fLink').value.trim();
   if(!d||!v||!dt){toast('Preencha descrição, valor e data');return}
-  S.lancs.push({id:'L'+Date.now(),desc:d,val:v,data:dt,quem:el('fQuem').value,cat:el('fCat').value});
-  el('fDesc').value='';el('fVal').value='';el('fData').value='';
-  persist();toast('Lançamento adicionado')}
+  S.lancs.push({id:'L'+Date.now(),desc:d,val:v,data:dt,quem:el('fQuem').value,cat:el('fCat').value,link:link||''});
+  el('fDesc').value='';el('fVal').value='';el('fData').value='';el('fLink').value='';
+  persist();toast('Lançamento adicionado ✓')
+}
 function delLanc(id){S.lancs=S.lancs.filter(l=>l.id!==id);persist();toast('Removido')}
 function renderLancs(){
   const box=el('lancList');
-  if(!S.lancs.length){box.innerHTML='<p style="font-size:.78rem;color:var(--mut)">Nenhum avulso ainda. Parcelas do plano ficam em <b style="color:var(--txt)">Parcelas VIC</b>; novas cobranças Caixa, no <b style="color:var(--txt)">Extrato Caixa</b>.</p>';return}
+  if(!S.lancs.length){box.innerHTML='<p style="font-size:.82rem;color:var(--mut)">Nenhum avulso ainda. Parcelas do plano ficam em <b style="color:var(--txt)">Parcelas VIC</b>; novas cobranças Caixa, no <b style="color:var(--txt)">Extrato Caixa</b>.</p>';return}
   box.innerHTML=S.lancs.sort((a,b)=>b.data.localeCompare(a.data)).map(l=>`
-    <div class="lanc-item"><div><b>${l.desc}</b><br><span class="mono" style="font-size:.7rem;color:var(--dim)">${brDate(l.data)} · ${l.quem.toUpperCase()}${l.cat?' · '+l.cat:''}</span></div>
-    <div style="display:flex;align-items:center;gap:6px"><span class="mono c-green" style="font-weight:600">${fmt(l.val)}</span>
-    <button class="x" onclick="delLanc('${l.id}')">✕</button></div></div>`).join('')}
+    <div class="lanc-item">
+      <div style="flex:1">
+        <b style="font-size:.9rem">${l.desc}</b>
+        <br><span class="mono" style="font-size:.73rem;color:var(--dim)">${brDate(l.data)} · ${l.quem.toUpperCase()}${l.cat?' · '+l.cat:''}</span>
+        ${l.link?`<br><a class="lanc-link" href="${l.link}" target="_blank" rel="noopener">🔗 Ver produto ↗</a>`:''}
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+        <span class="mono c-green" style="font-weight:700;font-size:.9rem">${fmt(l.val)}</span>
+        <button class="x" onclick="delLanc('${l.id}')">✕</button>
+      </div>
+    </div>`).join('')
+}
+
+/* ---- widgets ---- */
+function saveNote(){
+  S.note=el('noteArea').value;
+  try{localStorage.setItem('apto1302v5',JSON.stringify(S))}catch(e){}
+  toast('Nota salva ✓');
+}
+function addWish(){
+  const v=el('wishInput').value.trim();
+  if(!v)return;
+  if(!S.wishes)S.wishes=[];
+  S.wishes.push({id:'W'+Date.now(),text:v,done:false});
+  el('wishInput').value='';
+  persist();
+}
+function toggleWish(id){
+  const w=S.wishes.find(x=>x.id===id);if(!w)return;
+  w.done=!w.done;persist();
+}
+function delWish(id){
+  S.wishes=S.wishes.filter(x=>x.id!==id);persist();
+}
+function renderWidgets(){
+  // note
+  if(el('noteArea')&&!el('noteArea').dataset.init){
+    el('noteArea').value=S.note||'';
+    el('noteArea').dataset.init='1';
+  }
+  // wish list
+  const wb=el('wishList');
+  if(wb){
+    const wishes=S.wishes||[];
+    if(!wishes.length){wb.innerHTML='<p style="font-size:.8rem;color:var(--dim);padding:8px 0">Nada na lista ainda.</p>';return;}
+    wb.innerHTML=wishes.map(w=>`
+      <div class="wish-item">
+        <button class="wish-check ${w.done?'done':''}" onclick="toggleWish('${w.id}')">${w.done?'✓':''}</button>
+        <span class="wish-text ${w.done?'done':''}">${w.text}</span>
+        <button class="wish-del" onclick="delWish('${w.id}')">✕</button>
+      </div>`).join('');
+  }
+  // timeline
+  renderTimeline();
+}
+const TIMELINE_EVENTS=[
+  {date:'2024-07-26',label:'Contrato VIC assinado',icon:'📝',color:'#3570C4'},
+  {date:'2024-07-29',label:'Sinal pago (R$ 13.349)',icon:'💳',color:'#1FA868'},
+  {date:'2024-08-26',label:'Contrato Caixa assinado',icon:'🏦',color:'#3570C4'},
+  {date:'2024-09-05',label:'1ª mensal VIC paga',icon:'✅',color:'#1FA868'},
+  {date:'2024-10-01',label:'1ª evolução Caixa paga',icon:'🏗️',color:'#C47F17'},
+  {date:'2026-07-16',label:'Acerto geral VIC · mensais 19-23 quitadas',icon:'🎉',color:'#1FA868'},
+  {date:'2026-07-17',label:'Hoje',icon:'📍',color:'#C43B3B'},
+];
+function renderTimeline(){
+  const box=el('timeline');if(!box)return;
+  const sorted=[...TIMELINE_EVENTS].sort((a,b)=>a.date.localeCompare(b.date));
+  box.innerHTML=sorted.map((e,i)=>{
+    const isToday=e.date===hoje.toISOString().slice(0,10);
+    return `<div style="position:relative;padding:0 0 18px 20px;${i===sorted.length-1?'padding-bottom:0':''}">
+      <div style="position:absolute;left:0;top:4px;width:14px;height:14px;border-radius:50%;background:${e.color};border:2px solid #fff;box-shadow:0 0 0 2px ${e.color}"></div>
+      ${i<sorted.length-1?`<div style="position:absolute;left:6px;top:16px;bottom:0;width:2px;background:var(--line)"></div>`:''}
+      <div style="font-size:.75rem;color:var(--mut);font-family:'JetBrains Mono'">${brDate(e.date)}</div>
+      <div style="font-size:.88rem;font-weight:${isToday?'700':'600'};color:${isToday?e.color:' var(--txt)'};margin-top:1px">${e.icon} ${e.label}</div>
+    </div>`;
+  }).join('');
+}
 
 /* ---- gráficos ---- */
-Chart.defaults.color='#8B96A8';Chart.defaults.font.family="'JetBrains Mono',monospace";Chart.defaults.font.size=10;
-const GRID='rgba(255,255,255,.05)';
+Chart.defaults.color='#5A6B88';Chart.defaults.font.family="'JetBrains Mono',monospace";Chart.defaults.font.size=11;
+const GRID='rgba(0,0,0,.05)';
 function anoData(){const a={};S.vic.filter(p=>!p.pago).forEach(p=>{const y=p.venc.slice(0,4);a[y]=(a[y]||0)+p.val});return a}
 function renderCharts(){
   Object.values(charts).forEach(c=>c.destroy());
   charts.split=new Chart(el('chSplit'),{type:'doughnut',
-    data:{labels:['VIC','Caixa (você)','Avulsos'],datasets:[{data:[D.vicPago,D.cxVoce,D.avul],backgroundColor:['#C9A254','#6B93C8','#3FB68B'],borderWidth:0,cutout:'62%'}]},
-    options:{plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:9,font:{size:9,family:'Inter'}}},
-      title:{display:true,text:'Para onde foi o seu dinheiro',color:'#E6EAF0',font:{family:'Space Grotesk',size:12,weight:'600'}},
+    data:{labels:['VIC','Caixa (você)','Avulsos'],datasets:[{data:[D.vicPago,D.cxVoce,D.avul],backgroundColor:['#C47F17','#3570C4','#1FA868'],borderWidth:0,cutout:'62%'}]},
+    options:{plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10,family:'Inter'}}},
+      title:{display:true,text:'Para onde foi o seu dinheiro',color:'#1A2235',font:{family:'Space Grotesk',size:13,weight:'700'}},
       tooltip:{callbacks:{label:c=>c.label+': '+fmt(c.raw)}}}}});
   const anos=anoData();
   charts.ano=new Chart(el('chAno'),{type:'bar',
-    data:{labels:Object.keys(anos),datasets:[{data:Object.values(anos),backgroundColor:'rgba(201,162,84,.5)',borderColor:'#C9A254',borderWidth:1,borderRadius:6,maxBarThickness:64}]},
-    options:{plugins:{legend:{display:false},title:{display:true,text:'Ainda a desembolsar, por ano',color:'#E6EAF0',font:{family:'Space Grotesk',size:12,weight:'600'}},
+    data:{labels:Object.keys(anos),datasets:[{data:Object.values(anos),backgroundColor:'rgba(196,127,23,.55)',borderColor:'#C47F17',borderWidth:1.5,borderRadius:7,maxBarThickness:64}]},
+    options:{plugins:{legend:{display:false},title:{display:true,text:'Ainda a desembolsar, por ano',color:'#1A2235',font:{family:'Space Grotesk',size:13,weight:'700'}},
       tooltip:{callbacks:{label:c=>fmt(c.raw)}}},
       scales:{y:{grid:{color:GRID},ticks:{callback:v=>'R$ '+(v/1000)+'k'}},x:{grid:{display:false}}}}});
   charts.comp=new Chart(el('chCxComp'),{type:'doughnut',
     data:{labels:['Juros','Correção','Seguro MIP','Tarifas','Mora'],
-      datasets:[{data:[D.tJur,D.tCor,D.tMip,D.tTx,D.tMora],backgroundColor:['#D9646E','#6B93C8','#3FB68B','#8B96A8','#C9A254'],borderWidth:0,cutout:'60%'}]},
-    options:{plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:8,font:{size:9,family:'Inter'}}},
-      title:{display:true,text:'Composição das prestações',color:'#E6EAF0',font:{family:'Space Grotesk',size:12,weight:'600'}},
+      datasets:[{data:[D.tJur,D.tCor,D.tMip,D.tTx,D.tMora],backgroundColor:['#C43B3B','#3570C4','#1FA868','#8A9BB8','#C47F17'],borderWidth:0,cutout:'60%'}]},
+    options:{plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:9,font:{size:10,family:'Inter'}}},
+      title:{display:true,text:'Composição das prestações',color:'#1A2235',font:{family:'Space Grotesk',size:13,weight:'700'}},
       tooltip:{callbacks:{label:c=>c.label+': '+fmt(c.raw)}}}}});
   charts.mes=new Chart(el('chCxMes'),{type:'bar',
     data:{labels:D.cxOrd.map(c=>mesNome(c.venc)),
       datasets:[
-        {label:'Juros',data:D.cxOrd.map(c=>c.jur),backgroundColor:'#D9646E',stack:'s'},
-        {label:'Correção',data:D.cxOrd.map(c=>c.cor),backgroundColor:'#6B93C8',stack:'s'},
-        {label:'MIP+Taxa',data:D.cxOrd.map(c=>c.mip+c.tx),backgroundColor:'#8B96A8',stack:'s'},
-        {label:'Mora',data:D.cxOrd.map(c=>c.mora),backgroundColor:'#C9A254',stack:'s'},
-        {type:'line',label:'Saldo devedor',data:D.cxOrd.map(c=>c.saldo),borderColor:'#3FB68B',backgroundColor:'transparent',yAxisID:'y1',tension:.3,pointRadius:2,borderWidth:1.5}]},
-    options:{plugins:{legend:{position:'bottom',labels:{boxWidth:9,padding:8,font:{size:9,family:'Inter'}}},
+        {label:'Juros',data:D.cxOrd.map(c=>c.jur),backgroundColor:'#C43B3B',stack:'s'},
+        {label:'Correção',data:D.cxOrd.map(c=>c.cor),backgroundColor:'#3570C4',stack:'s'},
+        {label:'MIP+Taxa',data:D.cxOrd.map(c=>c.mip+c.tx),backgroundColor:'#8A9BB8',stack:'s'},
+        {label:'Mora',data:D.cxOrd.map(c=>c.mora),backgroundColor:'#C47F17',stack:'s'},
+        {type:'line',label:'Saldo devedor',data:D.cxOrd.map(c=>c.saldo),borderColor:'#1FA868',backgroundColor:'transparent',yAxisID:'y1',tension:.3,pointRadius:2,borderWidth:2}]},
+    options:{plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:9,font:{size:10,family:'Inter'}}},
       tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}}},
       scales:{y:{stacked:true,grid:{color:GRID},ticks:{callback:v=>'R$ '+(v/1000).toFixed(1)+'k'}},
         y1:{position:'right',grid:{display:false},ticks:{callback:v=>(v/1000)+'k'}},
         x:{stacked:true,grid:{display:false},ticks:{maxTicksLimit:11}}}}});
 }
 
-/* ================= MODAIS DE DETALHE ================= */
+/* ============ MODAIS DE DETALHE ============ */
 function openModal(html){el('modalBody').innerHTML=html;el('overlay').classList.add('show');document.body.style.overflow='hidden'}
 function closeModal(){el('overlay').classList.remove('show');document.body.style.overflow=''}
 function tbl(rows,head){return `<table class="mtable"><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr>${rows}</table>`}
@@ -759,23 +1141,23 @@ function tbl(rows,head){return `<table class="mtable"><tr>${head.map(h=>`<th>${h
 function openDetail(k){
   if(k==='atraso'){
     if(!D.atrasoArr.length){openModal(`<h3>Em atraso hoje</h3><div class="msub">Nenhuma parcela vencida sem pagamento. 🎉</div>
-      <p style="font-size:.8rem;color:var(--mut);line-height:1.6">Se atrasar: juros de 1% a.m. + multa de 2% (cláusula 6.1). Após 5 dias a VIC pode negativar no SPC/Serasa sem aviso. 3 parcelas ou 90 dias em aberto → risco de rescisão com retenção de 50% do valor pago.</p>`);return}
+      <p style="font-size:.84rem;color:var(--mut);line-height:1.6">Se atrasar: juros de 1% a.m. + multa de 2% (cláusula 6.1). Após 5 dias a VIC pode negativar no SPC/Serasa sem aviso.</p>`);return}
     const rows=D.atrasoArr.map(p=>`<tr><td>${p.t}</td><td>${brDate(p.venc)}</td><td>${fmt(p.val)}</td></tr>`).join('');
     openModal(`<h3>Em atraso hoje — ${fmt(D.atrasoVal)}</h3><div class="msub">Regularize no portal da VIC para evitar juros de mora (1% a.m.) e multa (2%).</div>
       ${tbl(rows,['Parcela','Venceu','Valor'])}
-      <a class="btn" style="margin-top:14px" href="https://vicengenharia.com.br/portal-do-cliente/" target="_blank">2ª via no portal VIC</a>`);
+      <a class="btn" style="margin-top:16px" href="https://vicengenharia.com.br/portal-do-cliente/" target="_blank">2ª via no portal VIC</a>`);
   }
   if(k==='prox'){
     const prox6=D.futuras.slice(0,6);
     const rows=prox6.map((p,i)=>`<tr class="${i===0?'hl':''}"><td>${p.t}</td><td>${brDate(p.venc)}</td><td>${fmt(p.val)}</td></tr>`).join('');
     const tot30=D.futuras.filter(p=>{const d=parseISO(p.venc);return (d-hoje)/864e5<=30}).reduce((s,p)=>s+p.val,0);
-    openModal(`<h3>Próximos pagamentos</h3><div class="msub">Vencem nos próximos 30 dias: <b class="mono" style="color:var(--amber)">${fmt(tot30)}</b>. Valores futuros são estimativas com reajuste 08/2026 — o INCC pode alterar.</div>
+    openModal(`<h3>Próximos pagamentos</h3><div class="msub">Vencem nos próximos 30 dias: <b class="mono" style="color:var(--amber)">${fmt(tot30)}</b>. Valores futuros são estimativas.</div>
       ${tbl(rows,['Parcela','Vence','Valor estimado'])}`);
   }
   if(k==='saldo'){
     const rows=D.cxOrd.map(c=>`<tr><td style="text-transform:capitalize">${mesNome(c.venc)}</td><td>${fmt(c.quit)}</td><td>${fmt(c.saldo)}</td></tr>`).join('');
     openModal(`<h3>Saldo devedor Caixa — evolução</h3>
-      <div class="msub">O saldo <b>sobe</b> a cada mês porque a Caixa libera mais dinheiro do financiamento à construtora conforme a obra avança (medições) — não é dívida sua por atraso. Ele chegará a ~R$ 294 mil quando o repasse terminar; aí começam as 360 prestações que o REDUZEM.</div>
+      <div class="msub">O saldo <b>sobe</b> porque a Caixa libera mais dinheiro à construtora a cada medição. Chegará a ~R$ 294 mil quando o repasse terminar; aí começam as 360 prestações que o REDUZEM.</div>
       ${tbl(rows,['Mês','Prestação paga','Saldo devedor'])}`);
   }
   if(k==='vic'){
@@ -800,73 +1182,48 @@ function openDetail(k){
   if(k==='anos'){
     const anos=anoData();
     const rows=Object.entries(anos).map(([y,v])=>`<tr><td>${y}</td><td>${fmt(v)}</td></tr>`).join('');
-    openModal(`<h3>Ainda a desembolsar, por ano</h3><div class="msub">Só parcelas VIC pendentes, com valor estimado (reajuste 08/2026). Total: <b class="mono c-amber">${fmt(D.falta)}</b>.</div>
+    openModal(`<h3>Ainda a desembolsar, por ano</h3><div class="msub">Só parcelas VIC pendentes, com valor estimado. Total: <b class="mono c-amber">${fmt(D.falta)}</b>.</div>
       ${tbl(rows,['Ano','Total estimado'])}`);
   }
   if(k==='cxtot'){
     const voceArr=D.cxOrd.filter(c=>c.pg==='voce'),consArr=D.cxOrd.filter(c=>c.pg!=='voce');
     openModal(`<h3>Total pago à Caixa — ${fmt(D.cxTot)}</h3>
-      <div class="msub">Divisão por pagador (edite no extrato se algo estiver diferente):</div>
       <div class="brk">
         <div class="k">Pago por você (${voceArr.length} meses)</div><div class="n c-blue">${fmt(voceArr.reduce((s,c)=>s+c.quit,0))}</div>
         <div class="k">Pago pela construtora (${consArr.length} meses)</div><div class="n">${fmt(consArr.reduce((s,c)=>s+c.quit,0))}</div>
         <div class="k tot">Prestação média</div><div class="n tot">${fmt(D.cxTot/D.cxOrd.length)}</div>
       </div>
-      <p style="font-size:.75rem;color:var(--mut);margin-top:12px;line-height:1.6">Dos meses pagos pela construtora, mar e abr/26 foram repassados a você na ficha VIC (reembolsos quitados em 16/07). Jun e jul/26 até agora não constam repassados.</p>`);
+      <p style="font-size:.8rem;color:var(--mut);margin-top:14px;line-height:1.6">Mar e abr/26 foram repassados a você na ficha VIC (reembolsos quitados em 16/07). Jun e jul/26 constam pagos pela construtora.</p>`);
   }
   if(k==='cxjuros'){
     const rows=D.cxOrd.map(c=>`<tr><td style="text-transform:capitalize">${mesNome(c.venc)}</td><td>${fmt(c.jur)}</td><td>${(c.jur/c.quit*100).toFixed(0)}%</td></tr>`).join('');
     openModal(`<h3>Juros pagos — ${fmt(D.tJur)}</h3>
-      <div class="msub">Juro da fase de obra: incide sobre o valor já liberado à construtora, todo mês, sem amortizar nada. É o "aluguel do dinheiro" enquanto a obra não entrega — e o principal argumento de ressarcimento pelo atraso.</div>
+      <div class="msub">Juro da fase de obra: incide sobre o valor já liberado à construtora, todo mês, sem amortizar nada.</div>
       ${tbl(rows,['Mês','Juros','% da prestação'])}`);
   }
 }
 
-/* ---- export/import ---- */
-function exportJSON(){
-  const blob=new Blob([JSON.stringify(S)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download=`apto1302-dados_${hoje.toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href);
-  toast('Backup .json salvo (leve)')}
-function importJSON(ev){
-  const f=ev.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{try{const d=JSON.parse(r.result);
-    if(!d.vic||!d.cx){toast('Arquivo inválido');return}
-    S=d;persist();toast('Dados importados')}catch(e){toast('Erro ao ler o arquivo')}};
-  r.readAsText(f);ev.target.value='';
-}
-function exportHTML(){
-  const clone=document.documentElement.cloneNode(true);
-  clone.querySelector('#app-state').textContent=JSON.stringify(S);
-  const blob=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download=`apto-1302_${hoje.toISOString().slice(0,10)}.html`;a.click();URL.revokeObjectURL(a.href);
-  toast('HTML completo salvo')}
-function resetAll(){
-  if(!confirm('Apagar suas marcações e voltar aos dados originais?'))return;
-  S=defaultState();try{localStorage.removeItem('apto1302v4')}catch(e){}recalc();toast('Dados restaurados')}
-
+/* ============ TABS ============ */
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('section').forEach(s=>s.classList.remove('show'));
   b.classList.add('active');el(b.dataset.tab).classList.add('show');
   window.scrollTo({top:0,behavior:'smooth'})}));
 
-/* ---- FAQ ---- */
+/* ============ FAQ ============ */
 const faqs=[
  ['O que conta como "investimento do meu bolso"?',`Tudo que <b>você</b> pagou: sinal, mensais VIC, reembolsos de evolução, prestações Caixa marcadas como "pagas por você" e avulsos. Prestações cobertas pela construtora e o repasse do financiamento não entram.`],
- ['Por que paguei tanto juro à Caixa sem amortizar nada?',`A Evolução de Obra cobre só <b>juros + correção + seguro + tarifa</b> sobre o valor já liberado. Não abate o saldo — por isso ele cresce (R$ 62,8 mil → <span class="mono">R$ 263 mil</span>) a cada medição. A amortização começa nas 360 prestações após a entrega.`],
- ['O que é TR? E o seguro MIP?',`<b>TR</b> (Taxa Referencial) é o indexador que corrige o saldo devedor — historicamente próxima de zero, mas positiva desde 2022. <b>MIP</b> é o seguro obrigatório de Morte e Invalidez Permanente (R$ 28,24/mês): quita o financiamento se algo acontecer com você ou a Talita, na proporção da renda de cada um (62,65% / 37,35%). Há também o <b>DFI</b> (danos físicos ao imóvel), embutido após a entrega.`],
- ['Por que a construtora pagou alguns meses da Caixa?',`Pelo atraso da entrega, a VIC assumiu cobranças da Caixa (mar, abr, jun e jul/26 — jul consta "Paga pela construtora" no app). Mar e abr ela repassou na ficha (reembolsos quitados em 16/07). Ajuste quem pagou cada mês no Extrato Caixa.`],
- ['Por que a mensal VIC sobe todo ano?',`Correção pelo <b>INCC</b> até a entrega (R$ 975 → R$ 1.116). Depois do Habite-se: <b>IPCA + 1% a.m.</b> As futuras usam estimativa de 08/2026 — edite ao pagar.`],
- ['A obra atrasou. Quais são meus direitos?',`Prazo Caixa <span class="mono">22/12/2025</span> + 6 meses de tolerância = jun/2026. Depois, a cláusula 8.6 prevê multa de <b>0,5% a.m.</b> do valor do imóvel em seu favor (≈ R$ 1.870/mês). Os juros de obra pagos no atraso embasam o ressarcimento — procure um advogado.`],
+ ['Por que paguei tanto juro à Caixa sem amortizar nada?',`A Evolução de Obra cobre só <b>juros + correção + seguro + tarifa</b> sobre o valor já liberado. Não abate o saldo — por isso ele cresce (R$ 62,8 mil → <span class="mono">R$ 263 mil</span>). A amortização começa nas 360 prestações após a entrega.`],
+ ['O que é TR? E o seguro MIP?',`<b>TR</b> é o indexador que corrige o saldo devedor. <b>MIP</b> é o seguro de Morte e Invalidez Permanente (R$ 28,24/mês): quita o financiamento se algo acontecer com você ou a Talita, na proporção de renda (62,65% / 37,35%). Há também o <b>DFI</b> (danos físicos), embutido após a entrega.`],
+ ['Por que a construtora pagou alguns meses da Caixa?',`Pelo atraso da entrega, a VIC assumiu cobranças da Caixa. Mar e abr ela repassou na ficha (reembolsos quitados em 16/07). Jun e jul constam "Paga pela construtora".`],
+ ['Por que a mensal VIC sobe todo ano?',`Correção pelo <b>INCC</b> até a entrega (R$ 975 → R$ 1.116). Depois do Habite-se: <b>IPCA + 1% a.m.</b>`],
+ ['A obra atrasou. Quais são meus direitos?',`Prazo Caixa <span class="mono">22/12/2025</span> + 6 meses de tolerância = jun/2026. Depois, cláusula 8.6 prevê multa de <b>0,5% a.m.</b> do valor do imóvel em seu favor (≈ R$ 1.870/mês). Procure um advogado.`],
  ['Quando pego as chaves?',`Habite-se → vistoria → Termo de Recebimento → em dia com a VIC e financiamento assinado. Parcelas <i>a vencer</i> não impedem as chaves.`],
- ['Posso amortizar/quitar o financiamento antecipado?',`Sim — após a entrega, você pode amortizar com recursos próprios ou <b>FGTS a cada 2 anos</b> (reduzindo prazo ou parcela), sem multa. No sistema PRICE, amortizar cedo economiza muito juro: nos primeiros anos, ~90% da prestação é só juro.`],
+ ['Posso amortizar/quitar antecipado?',`Sim — após a entrega, com recursos próprios ou <b>FGTS a cada 2 anos</b> (reduzindo prazo ou parcela), sem multa.`],
  ['Se eu atrasar uma mensal VIC?',`Juros 1% a.m. + multa 2%; após 5 dias pode negativar. 3 parcelas ou 90 dias → risco de rescisão com retenção de 50% do pago + corretagem.`],
- ['E se eu quiser vender antes das chaves?',`Cessão permitida com: 90+ dias de contrato, obra em andamento, você em dia, anuência da VIC e da Caixa, e taxa de <span class="mono">R$ 700</span>. Como você comprou abaixo da avaliação, há margem de ganho.`],
- ['O que foi o ITBI que paguei?',`Imposto municipal de transmissão: <span class="mono">R$ 3.162,72</span> (2% sobre recursos próprios + 0,5% sobre o financiado — alíquota reduzida por ser SFH/1º imóvel). Lance em Avulsos para compor seu investimento total.`],
- ['Fiz bom negócio?',`Avaliação Caixa <span class="mono">R$ 400.000</span> vs. compra R$ 374.191,77 → <b class="c-green">R$ 25,8 mil abaixo</b>, sem contar a valorização até a entrega.`],
+ ['E se eu quiser vender antes das chaves?',`Cessão permitida com: 90+ dias de contrato, obra em andamento, você em dia, anuência da VIC e da Caixa, e taxa de <span class="mono">R$ 700</span>.`],
+ ['O que foi o ITBI que paguei?',`Imposto municipal de transmissão: <span class="mono">R$ 3.162,72</span> (2% sobre recursos próprios + 0,5% sobre o financiado). Lance em Avulsos para compor seu investimento total.`],
+ ['Fiz bom negócio?',`Avaliação Caixa <span class="mono">R$ 400.000</span> vs. compra R$ 374.191,77 → <b class="c-green">R$ 25,8 mil abaixo</b>, sem contar a valorização até a entrega. 🎉`],
 ];
 faqs.forEach(([q,a])=>{
   const d=document.createElement('div');d.className='faq-item';
